@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>안녕하세요 — 파티에 초대합니다</title>
+<title>웨딩 파티에 초대합니다</title>
 <style>
   :root {
     --bg: #fafaf7;
@@ -14,7 +14,6 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -56,9 +55,7 @@
     transition: color 0.2s ease;
   }
 
-  nav.topnav a:hover {
-    color: var(--accent);
-  }
+  nav.topnav a:hover { color: var(--accent); }
 
   .container {
     max-width: 720px;
@@ -95,42 +92,72 @@
   }
 
   .hero h1 {
-    font-size: 42px;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    margin-bottom: 12px;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    margin-bottom: 14px;
   }
 
   .hero .tagline {
     color: var(--muted);
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: 0.02em;
   }
 
-  /* Main Photos Row (group / multi) */
-  .main-photos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-top: 40px;
+  /* Program Cards — Circle icon style */
+  .program-cards {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 48px;
+    margin-bottom: 60px;
   }
 
-  .main-photos .avatar {
-    aspect-ratio: 1;
+  .program-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+
+  .program-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .program-card .circle {
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     background: linear-gradient(135deg, #e8e4dc, #d4cec2);
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--muted);
-    font-size: 12px;
-    overflow: hidden;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    border: 3px solid white;
   }
 
-  .main-photos .avatar img {
+  .program-card .circle img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .program-card .label-en {
+    margin-top: 18px;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 500px) {
+    .program-cards { gap: 20px; }
+    .program-card .circle { width: 85px; height: 85px; }
+    .program-card .label-en { font-size: 11px; margin-top: 14px; letter-spacing: 0.2em; }
   }
 
   /* Section */
@@ -161,10 +188,6 @@
     font-size: 17px;
   }
 
-  p.muted {
-    color: var(--muted);
-  }
-
   p.invite-text {
     font-size: 14px;
     line-height: 2;
@@ -176,32 +199,6 @@
 
   p.invite-text:last-child {
     margin-bottom: 0;
-  }
-
-  /* Gallery */
-  .gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 40px;
-  }
-
-  .gallery-item {
-    aspect-ratio: 1;
-    background: linear-gradient(135deg, #ede8de, #dfd8c9);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 13px;
-    overflow: hidden;
-  }
-
-  .gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 
   /* Invitation */
@@ -267,107 +264,6 @@
     color: var(--bg);
   }
 
-  /* Location Section */
-  .map-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    background: #eee;
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 32px 0;
-    border: 1px solid var(--line);
-  }
-
-  .map-wrap iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  .address-box {
-    background: white;
-    border: 1px solid var(--line);
-    padding: 24px;
-    border-radius: 4px;
-    margin-bottom: 32px;
-  }
-
-  .address-box .name {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
-
-  .address-box .addr {
-    color: var(--muted);
-    font-size: 15px;
-    margin-bottom: 4px;
-  }
-
-  .address-box .phone {
-    color: var(--muted);
-    font-size: 14px;
-  }
-
-  .map-links {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-bottom: 40px;
-  }
-
-  .map-links a {
-    text-align: center;
-    padding: 14px 8px;
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    color: var(--fg);
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    transition: all 0.2s ease;
-  }
-
-  .map-links a:hover {
-    border-color: var(--fg);
-  }
-
-  .directions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-
-  .direction-block {
-    background: white;
-    border: 1px solid var(--line);
-    padding: 24px;
-    border-radius: 4px;
-  }
-
-  .direction-block h4 {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .direction-block p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 8px;
-    color: var(--fg);
-  }
-
-  .direction-block .small {
-    font-size: 13px;
-    color: var(--muted);
-  }
-
   /* Footer */
   footer {
     text-align: center;
@@ -382,13 +278,11 @@
     nav.topnav ul { gap: 20px; padding: 16px 20px; }
     nav.topnav a { font-size: 11px; letter-spacing: 0.1em; }
     .container { padding: 40px 24px; }
-    .hero h1 { font-size: 32px; }
+    .hero h1 { font-size: 22px; }
     .photo { width: 160px; height: 160px; }
     .invite-card { padding: 32px 24px; }
     .details li { flex-direction: column; gap: 4px; }
     .details .value { text-align: left; }
-    .directions { grid-template-columns: 1fr; }
-    .map-links { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -409,35 +303,39 @@
     <!-- Hero -->
     <header class="hero">
       <div class="photo">
-        <!-- 대표 사진 1장: 파일명 수정 -->
-        <!-- <img src="images/main.jpg" alt="대표 사진"> -->
-        MAIN PHOTO
+        <img src="images/main.jpeg" alt="대표 사진">
       </div>
-      <h1>안녕하세요, 저희를 소개합니다</h1>
-      <p class="tagline">작은 파티에 여러분을 초대합니다</p>
-
-      <!-- 여러 명의 프로필 사진을 원한다면 아래를 사용 -->
-      <div class="main-photos">
-        <div class="avatar">
-          <!-- <img src="images/person1.jpg" alt="사람1"> -->
-          PERSON 1
-        </div>
-        <div class="avatar">
-          <!-- <img src="images/person2.jpg" alt="사람2"> -->
-          PERSON 2
-        </div>
-        <div class="avatar">
-          <!-- <img src="images/person3.jpg" alt="사람3"> -->
-          PERSON 3
-        </div>
-      </div>
+      <h1>SAVE THE DATE</h1>
+      <p class="tagline">웨딩 파티에 여러분을 초대합니다</p>
     </header>
 
     <!-- About -->
     <section id="about">
-      <div class="label">About</div>
-      <h2>소중한 분들께</h2>
-      <p class="invite-text">
+      <div class="label" style="text-align: center;">About</div>
+
+      <!-- 파티 프로그램 미리보기 -->
+      <div class="program-cards">
+        <div class="program-card">
+          <div class="circle">
+            <img src="images/space.jpeg" alt="Space">
+          </div>
+          <div class="label-en">Space</div>
+        </div>
+        <div class="program-card">
+          <div class="circle">
+            <img src="images/dining.jpeg" alt="Dining">
+          </div>
+          <div class="label-en">Dining</div>
+        </div>
+        <div class="program-card">
+          <div class="circle">
+            <img src="images/dessert.jpeg" alt="Dessert">
+          </div>
+          <div class="label-en">Dessert</div>
+        </div>
+      </div>
+
+      <p class="invite-text" style="margin-top: 60px;">
         작지만 따뜻한 자리를 준비했습니다.<br>
         편한 마음으로 오셔서, 좋은 이야기와 시간을 나누어요.
       </p>
@@ -462,25 +360,24 @@
       <p class="invite-text">
         함께해 주시는 마음만으로도<br>
         저희에겐 큰 기쁨이 될 것입니다.<br>
-        감사합니다.
+        감사합니다.<br><br>
+        이건호 &amp; 은지수 드림
       </p>
     </section>
 
     <!-- Party Invitation -->
     <section id="invitation">
-      <div class="label">Invitation</div>
-      <h2>초대장</h2>
-      <p>
+      <div class="label" style="text-align: center;">Invitation</div>
+      <p style="text-align: center;">
         원활한 준비를 위해 참석 여부와 인원을 아래 RSVP로 알려주시면 감사하겠습니다.
       </p>
 
       <div class="invite-card">
         <h3>You're Invited</h3>
         <ul class="details">
-          <li><span class="key">DATE</span><span class="value">2026년 9월 12일 토요일</span></li>
-          <li><span class="key">TIME</span><span class="value">오후 6시 30분</span></li>
-          <li><span class="key">PLACE</span><span class="value">카페 OOO (4층)</span></li>
-          <li><span class="key">DRESS</span><span class="value">편안하게</span></li>
+          <li><span class="key">DATE</span><span class="value">2026년 11월 7일 토요일</span></li>
+          <li><span class="key">TIME</span><span class="value">오후 5시</span></li>
+          <li><span class="key">PLACE</span><span class="value">틸티드한남</span></li>
         </ul>
 
         <div class="rsvp">
