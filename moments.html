@@ -4,9 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Moments</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #fafaf7;
@@ -27,40 +24,63 @@
     line-height: 1.7;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
   }
+
+  html { overflow-x: hidden; }
 
   /* Top Navigation */
   nav.topnav {
     position: sticky;
     top: 0;
-    background: rgba(250, 250, 247, 0.92);
+    background: rgba(250, 250, 247, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     z-index: 100;
   }
 
   nav.topnav ul {
     max-width: 1080px;
     margin: 0 auto;
-    padding: 18px 32px;
+    padding: 20px 32px;
     display: flex;
     justify-content: center;
-    gap: 32px;
+    gap: 40px;
     list-style: none;
   }
 
   nav.topnav a {
-    color: var(--muted);
+    position: relative;
+    color: var(--fg);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     transition: color 0.2s ease;
+    padding: 4px 0;
+  }
+
+  nav.topnav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
   }
 
   nav.topnav a:hover { color: var(--accent); }
-  nav.topnav a.active { color: var(--fg); }
+  nav.topnav a:hover::after { transform: scaleX(1); }
+  nav.topnav a.active { color: var(--accent); }
+  nav.topnav a.active::after { transform: scaleX(1); }
 
   .container {
     max-width: 1080px;
@@ -78,7 +98,7 @@
 
   .gallery-item {
     background: white;
-    padding: 14px 14px 40px;
+    padding: 14px 14px 58px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
     display: flex;
     flex-direction: column;
@@ -114,17 +134,6 @@
     object-fit: cover;
   }
 
-  .gallery-item figcaption {
-    text-align: center;
-    padding-top: 12px;
-    color: #9a9a95;
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    font-family: "Gaegu", "Segoe Script", cursive;
-    font-weight: 300;
-    line-height: 1.3;
-  }
-
   /* Back link */
   .back-home {
     text-align: center;
@@ -144,15 +153,173 @@
 
   .back-home a:hover { color: var(--accent); }
 
+  /* Comment Modal */
+  .comment-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .comment-modal.active {
+    display: flex;
+  }
+
+  .comment-modal-content {
+    background: white;
+    width: min(94vw, 480px);
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px 24px 24px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .comment-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #888;
+    padding: 0;
+    line-height: 1;
+    z-index: 3;
+  }
+
+  .comment-modal-close:hover {
+    color: #333;
+  }
+
+  .comment-photo {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    background: #f5f5f5;
+  }
+
+  .comment-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .comment-list {
+    margin-bottom: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 8px 4px;
+  }
+
+  .comment-list .empty,
+  .comment-list .loading {
+    color: #999;
+    text-align: center;
+    font-size: 13px;
+    padding: 20px 0;
+    letter-spacing: 0.02em;
+  }
+
+  .comment-item {
+    padding: 10px 4px;
+    border-bottom: 1px dashed #eee;
+  }
+
+  .comment-item:last-child {
+    border-bottom: none;
+  }
+
+  .comment-name {
+    font-size: 12px;
+    color: #888;
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .comment-message {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .comment-form input,
+  .comment-form textarea {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: white;
+  }
+
+  .comment-form input:focus,
+  .comment-form textarea:focus {
+    border-color: #666;
+  }
+
+  .comment-form textarea {
+    min-height: 70px;
+    resize: vertical;
+  }
+
+  .comment-form button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .comment-form button:hover {
+    background: #000;
+  }
+
+  .comment-form button:disabled {
+    background: #999;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 900px) {
     .gallery { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (max-width: 600px) {
-    nav.topnav ul { gap: 20px; padding: 16px 20px; }
-    nav.topnav a { font-size: 11px; letter-spacing: 0.1em; }
-    .container { padding: 40px 24px 80px; }
-    .gallery { grid-template-columns: 1fr; gap: 30px; }
+    nav.topnav ul { gap: 22px; padding: 16px 16px; }
+    nav.topnav a { font-size: 13px; letter-spacing: 0.1em; }
+    .container { padding: 40px 20px 80px; }
+    .gallery { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
+    .gallery-item { padding: 10px 10px 42px; }
+    .gallery-item:nth-child(3n+1) { transform: rotate(-1deg); }
+    .gallery-item:nth-child(3n+2) { transform: rotate(0.6deg); }
+    .gallery-item:nth-child(3n+3) { transform: rotate(-0.4deg); }
   }
 </style>
 </head>
@@ -170,41 +337,35 @@
   <div class="container">
 
     <div class="gallery">
-      <figure class="gallery-item">
+      <figure class="gallery-item" data-moment-id="moment1">
         <div class="photo-frame">
           <img src="images/moment1.jpeg" alt="">
         </div>
-        <figcaption>2026 봄, 첫 만남</figcaption>
       </figure>
-      <figure class="gallery-item">
+      <figure class="gallery-item" data-moment-id="moment2">
         <div class="photo-frame">
           <img src="images/moment2.jpeg" alt="">
         </div>
-        <figcaption>여름 저녁</figcaption>
       </figure>
-      <figure class="gallery-item">
+      <figure class="gallery-item" data-moment-id="moment3">
         <div class="photo-frame">
           <img src="images/moment3.jpeg" alt="">
         </div>
-        <figcaption>가을 산책</figcaption>
       </figure>
-      <figure class="gallery-item">
+      <figure class="gallery-item" data-moment-id="moment4">
         <div class="photo-frame">
           <img src="images/moment4.jpeg" alt="">
         </div>
-        <figcaption>겨울 카페</figcaption>
       </figure>
-      <figure class="gallery-item">
+      <figure class="gallery-item" data-moment-id="moment5">
         <div class="photo-frame">
           <img src="images/moment5.jpeg" alt="">
         </div>
-        <figcaption>순간 5</figcaption>
       </figure>
-      <figure class="gallery-item">
+      <figure class="gallery-item" data-moment-id="moment6">
         <div class="photo-frame">
           <img src="images/moment6.jpeg" alt="">
         </div>
-        <figcaption>순간 6</figcaption>
       </figure>
     </div>
 
@@ -213,5 +374,152 @@
     </div>
 
   </div>
+
+  <!-- Comment Modal -->
+  <div id="comment-modal" class="comment-modal" role="dialog" aria-modal="true">
+    <div class="comment-modal-content">
+      <button class="comment-modal-close" aria-label="닫기">×</button>
+      <div class="comment-photo">
+        <img id="comment-photo-img" src="" alt="">
+      </div>
+      <div class="comment-list" id="comment-list">
+        <p class="empty">첫 메시지를 남겨보세요</p>
+      </div>
+      <form class="comment-form" id="comment-form">
+        <input type="text" id="comment-name" placeholder="이름" required maxlength="20" autocomplete="off">
+        <textarea id="comment-message" placeholder="메시지를 남겨주세요 :)" required maxlength="500"></textarea>
+        <button type="submit" id="comment-submit">남기기</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase Comment System -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, query, where,
+      orderBy, onSnapshot, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // ⚠️ 아래 firebaseConfig 값을 Firebase 콘솔에서 복사해서 붙여넣으세요.
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC1LUBjRLfHXyN22l5wfqWZWH40MO73Uro",
+      authDomain: "weddingparty-3fcd4.firebaseapp.com",
+      projectId: "weddingparty-3fcd4",
+      storageBucket: "weddingparty-3fcd4.firebasestorage.app",
+      messagingSenderId: "642711237403",
+      appId: "1:642711237403:web:0ec6705597e4eef8b459be",
+      measurementId: "G-L402LR3VRV"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const modal = document.getElementById('comment-modal');
+    const closeBtn = modal.querySelector('.comment-modal-close');
+    const photoImg = document.getElementById('comment-photo-img');
+    const commentList = document.getElementById('comment-list');
+    const form = document.getElementById('comment-form');
+    const nameInput = document.getElementById('comment-name');
+    const messageInput = document.getElementById('comment-message');
+    const submitBtn = document.getElementById('comment-submit');
+
+    let currentMomentId = null;
+    let unsubscribe = null;
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const momentId = item.dataset.momentId;
+        const img = item.querySelector('img');
+        openModal(momentId, img.src);
+      });
+    });
+
+    function openModal(momentId, imgSrc) {
+      currentMomentId = momentId;
+      photoImg.src = imgSrc;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      loadComments(momentId);
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+
+    function loadComments(momentId) {
+      commentList.innerHTML = '<p class="loading">불러오는 중...</p>';
+      try {
+        const q = query(
+          collection(db, 'comments'),
+          where('momentId', '==', momentId),
+          orderBy('timestamp', 'desc')
+        );
+        unsubscribe = onSnapshot(q, (snapshot) => {
+          if (snapshot.empty) {
+            commentList.innerHTML = '<p class="empty">첫 메시지를 남겨보세요</p>';
+            return;
+          }
+          commentList.innerHTML = '';
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const item = document.createElement('div');
+            item.className = 'comment-item';
+            item.innerHTML = `
+              <div class="comment-name"></div>
+              <div class="comment-message"></div>
+            `;
+            item.querySelector('.comment-name').textContent = data.name || '익명';
+            item.querySelector('.comment-message').textContent = data.message || '';
+            commentList.appendChild(item);
+          });
+        }, (err) => {
+          console.error(err);
+          commentList.innerHTML = '<p class="empty">불러오기 실패</p>';
+        });
+      } catch (err) {
+        console.error(err);
+        commentList.innerHTML = '<p class="empty">Firebase 설정을 확인해주세요</p>';
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      const message = messageInput.value.trim();
+      if (!name || !message) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '전송 중...';
+
+      try {
+        await addDoc(collection(db, 'comments'), {
+          momentId: currentMomentId,
+          name: name,
+          message: message,
+          timestamp: serverTimestamp()
+        });
+        nameInput.value = '';
+        messageInput.value = '';
+      } catch (err) {
+        console.error(err);
+        alert('메시지 전송 실패. 잠시 후 다시 시도해주세요.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '남기기';
+      }
+    });
+  </script>
 </body>
 </html>

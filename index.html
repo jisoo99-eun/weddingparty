@@ -4,6 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>웨딩 파티에 초대합니다</title>
+
+<!-- 카톡/SMS 미리보기 (Open Graph) -->
+<!-- ⚠️ 아래 og:url 과 og:image 의 URL을 실제 GitHub Pages 주소로 교체하세요 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="이건호 &amp; 은지수 웨딩 파티">
+<meta property="og:description" content="초대합니다">
+<meta property="og:image" content="https://jisoo99-eun.github.io/weddingparty/images/main.jpeg">
+<meta property="og:url" content="https://jisoo99-eun.github.io/weddingparty/">
+<meta property="og:site_name" content="Wedding Party Invitation">
+<meta property="og:locale" content="ko_KR">
+
+<!-- 트위터/X 미리보기 -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="이건호 &amp; 은지수 웨딩 파티">
+<meta name="twitter:description" content="초대합니다">
+<meta name="twitter:image" content="https://jisoo99-eun.github.io/weddingparty/images/main.jpeg">
+
+<meta name="description" content="초대합니다">
 <style>
   :root {
     --bg: #fafaf7;
@@ -29,33 +47,53 @@
   nav.topnav {
     position: sticky;
     top: 0;
-    background: rgba(250, 250, 247, 0.92);
+    background: rgba(250, 250, 247, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     z-index: 100;
   }
 
   nav.topnav ul {
     max-width: 720px;
     margin: 0 auto;
-    padding: 18px 32px;
+    padding: 20px 32px;
     display: flex;
     justify-content: center;
-    gap: 32px;
+    gap: 40px;
     list-style: none;
   }
 
   nav.topnav a {
-    color: var(--muted);
+    position: relative;
+    color: var(--fg);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     transition: color 0.2s ease;
+    padding: 4px 0;
+  }
+
+  nav.topnav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
   }
 
   nav.topnav a:hover { color: var(--accent); }
+  nav.topnav a:hover::after { transform: scaleX(1); }
+  nav.topnav a.active { color: var(--accent); }
+  nav.topnav a.active::after { transform: scaleX(1); }
 
   .container {
     max-width: 720px;
@@ -71,24 +109,18 @@
   }
 
   .photo {
-    width: 220px;
-    height: 220px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #e8e4dc, #d4cec2);
+    width: 100%;
+    max-width: 720px;
     margin: 0 auto 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--muted);
-    font-size: 14px;
-    letter-spacing: 0.05em;
     overflow: hidden;
+    border-radius: 6px;
+    background: linear-gradient(135deg, #e8e4dc, #d4cec2);
   }
 
   .photo img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    display: block;
   }
 
   .hero h1 {
@@ -160,6 +192,101 @@
     .program-card .label-en { font-size: 11px; margin-top: 14px; letter-spacing: 0.2em; }
   }
 
+  /* Program Card as Link */
+  a.program-card {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  /* Modal (CSS-only using :target) */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal:target {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .modal-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .modal-content {
+    position: relative;
+    width: min(90vw, 500px);
+    aspect-ratio: 1;
+    background: white;
+    padding: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    transform: scale(0.95);
+    transition: transform 0.25s ease;
+  }
+
+  .modal:target .modal-content {
+    transform: scale(1);
+  }
+
+  .modal-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 32px;
+    text-decoration: none;
+    line-height: 1;
+    z-index: 3;
+    transition: transform 0.2s ease;
+  }
+
+  .modal-close:hover {
+    transform: scale(1.2);
+  }
+
+  /* Form Modal — larger for Google Form iframe */
+  .modal.form-modal .modal-content {
+    width: min(95vw, 640px);
+    aspect-ratio: auto;
+    height: min(88vh, 780px);
+    padding: 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .modal.form-modal .modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .modal.form-modal .modal-close {
+    top: -44px;
+    right: 4px;
+  }
+
   /* Section */
   section {
     margin-bottom: 100px;
@@ -201,21 +328,63 @@
     margin-bottom: 0;
   }
 
-  /* Invitation */
+  /* Invitation — Envelope style (clean white) */
   .invite-card {
-    border: 1px solid var(--line);
-    padding: 48px 40px;
-    background: white;
-    border-radius: 4px;
-    margin-top: 32px;
+    position: relative;
+    padding: 120px 40px 48px;
+    background: #fdfdfb;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08),
+                0 2px 6px rgba(0, 0, 0, 0.04),
+                inset 0 0 0 1px #eeeae2;
+    margin-top: 48px;
+    border-radius: 3px;
+  }
+
+  /* Envelope flap ∨ (two soft diagonal lines meeting at center) */
+  .invite-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 110px;
+    background:
+      linear-gradient(to bottom right,
+        transparent calc(50% - 0.6px),
+        #d5d0c4 calc(50% - 0.6px),
+        #d5d0c4 calc(50% + 0.6px),
+        transparent calc(50% + 0.6px))
+      top left / 50% 100% no-repeat,
+      linear-gradient(to bottom left,
+        transparent calc(50% - 0.6px),
+        #d5d0c4 calc(50% - 0.6px),
+        #d5d0c4 calc(50% + 0.6px),
+        transparent calc(50% + 0.6px))
+      top right / 50% 100% no-repeat;
+    pointer-events: none;
+  }
+
+  /* Subtle shading under the flap for paper depth */
+  .invite-card::after {
+    content: "";
+    position: absolute;
+    top: 110px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.025), transparent);
+    pointer-events: none;
   }
 
   .invite-card h3 {
-    font-size: 22px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
     font-weight: 400;
+    font-style: italic;
     margin-bottom: 32px;
     text-align: center;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.02em;
+    color: #3a3a3a;
   }
 
   .details {
@@ -226,19 +395,21 @@
     display: flex;
     justify-content: space-between;
     padding: 16px 0;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px dashed #d5d0c4;
     font-size: 15px;
   }
 
   .details li:last-child { border-bottom: none; }
 
   .details .key {
-    color: var(--muted);
+    color: #8a8a85;
     letter-spacing: 0.05em;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
   }
 
   .details .value {
-    color: var(--fg);
+    color: #3a3a3a;
     text-align: right;
   }
 
@@ -250,8 +421,9 @@
   .rsvp a {
     display: inline-block;
     padding: 14px 36px;
-    border: 1px solid var(--fg);
-    color: var(--fg);
+    border: 1px solid #3a3a3a;
+    color: #3a3a3a;
+    background: transparent;
     text-decoration: none;
     font-size: 14px;
     letter-spacing: 0.1em;
@@ -260,8 +432,9 @@
   }
 
   .rsvp a:hover {
-    background: var(--fg);
-    color: var(--bg);
+    background: #3a3a3a;
+    color: #fdfdfb;
+    border-color: #3a3a3a;
   }
 
   /* Footer */
@@ -275,11 +448,10 @@
   }
 
   @media (max-width: 600px) {
-    nav.topnav ul { gap: 20px; padding: 16px 20px; }
-    nav.topnav a { font-size: 11px; letter-spacing: 0.1em; }
+    nav.topnav ul { gap: 22px; padding: 16px 16px; }
+    nav.topnav a { font-size: 13px; letter-spacing: 0.1em; }
     .container { padding: 40px 24px; }
     .hero h1 { font-size: 22px; }
-    .photo { width: 160px; height: 160px; }
     .invite-card { padding: 32px 24px; }
     .details li { flex-direction: column; gap: 4px; }
     .details .value { text-align: left; }
@@ -315,24 +487,24 @@
 
       <!-- 파티 프로그램 미리보기 -->
       <div class="program-cards">
-        <div class="program-card">
+        <a href="#modal-space" class="program-card">
           <div class="circle">
             <img src="images/space.jpeg" alt="Space">
           </div>
           <div class="label-en">Space</div>
-        </div>
-        <div class="program-card">
+        </a>
+        <a href="#modal-dining" class="program-card">
           <div class="circle">
             <img src="images/dining.jpeg" alt="Dining">
           </div>
           <div class="label-en">Dining</div>
-        </div>
-        <div class="program-card">
+        </a>
+        <a href="#modal-dessert" class="program-card">
           <div class="circle">
             <img src="images/dessert.jpeg" alt="Dessert">
           </div>
           <div class="label-en">Dessert</div>
-        </div>
+        </a>
       </div>
 
       <p class="invite-text" style="margin-top: 60px;">
@@ -381,7 +553,7 @@
         </ul>
 
         <div class="rsvp">
-          <a href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfiFAhDgYlvdzncNMGs9yTtY3xOA3wY0JwpQ93u06sIYZITvg/viewform?usp=publish-editor&pli=1&authuser=0" target="_blank" rel="noopener">RSVP</a>
+          <a href="#modal-rsvp">RSVP</a>
         </div>
       </div>
     </section>
@@ -390,6 +562,44 @@
       Made with care · 2026
     </footer>
 
+  </div>
+
+  <!-- Modals -->
+  <div id="modal-space" class="modal">
+    <a href="#" class="modal-bg"></a>
+    <div class="modal-content">
+      <a href="#" class="modal-close" aria-label="닫기">×</a>
+      <img src="images/space.jpeg" alt="Space">
+    </div>
+  </div>
+
+  <div id="modal-dining" class="modal">
+    <a href="#" class="modal-bg"></a>
+    <div class="modal-content">
+      <a href="#" class="modal-close" aria-label="닫기">×</a>
+      <img src="images/dining.jpeg" alt="Dining">
+    </div>
+  </div>
+
+  <div id="modal-dessert" class="modal">
+    <a href="#" class="modal-bg"></a>
+    <div class="modal-content">
+      <a href="#" class="modal-close" aria-label="닫기">×</a>
+      <img src="images/dessert.jpeg" alt="Dessert">
+    </div>
+  </div>
+
+  <!-- RSVP Modal (Google Form embed) -->
+  <div id="modal-rsvp" class="modal form-modal">
+    <a href="#" class="modal-bg"></a>
+    <div class="modal-content">
+      <a href="#" class="modal-close" aria-label="닫기">×</a>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfiFAhDgYlvdzncNMGs9yTtY3xOA3wY0JwpQ93u06sIYZITvg/viewform?embedded=true"
+        title="RSVP 설문">
+        로딩 중...
+      </iframe>
+    </div>
   </div>
 </body>
 </html>

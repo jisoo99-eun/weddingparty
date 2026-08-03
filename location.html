@@ -29,34 +29,53 @@
   nav.topnav {
     position: sticky;
     top: 0;
-    background: rgba(255, 246, 234, 0.92);
+    background: rgba(255, 246, 234, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
     z-index: 100;
   }
 
   nav.topnav ul {
     max-width: 720px;
     margin: 0 auto;
-    padding: 18px 32px;
+    padding: 20px 32px;
     display: flex;
     justify-content: center;
-    gap: 32px;
+    gap: 40px;
     list-style: none;
   }
 
   nav.topnav a {
-    color: var(--muted);
+    position: relative;
+    color: var(--fg);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 15px;
+    font-weight: 500;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     transition: color 0.2s ease;
+    padding: 4px 0;
+  }
+
+  nav.topnav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
   }
 
   nav.topnav a:hover { color: var(--accent); }
-  nav.topnav a.active { color: var(--accent); font-weight: 500; }
+  nav.topnav a:hover::after { transform: scaleX(1); }
+  nav.topnav a.active { color: var(--accent); }
+  nav.topnav a.active::after { transform: scaleX(1); }
 
   .container {
     max-width: 720px;
@@ -122,6 +141,21 @@
     letter-spacing: 0.02em;
   }
 
+  .star-mark {
+    position: relative;
+    display: inline-block;
+  }
+
+  .star-mark::before {
+    content: "★";
+    position: absolute;
+    top: -9px;
+    left: -10px;
+    font-size: 11px;
+    color: #FFC700;
+    line-height: 1;
+  }
+
   .info-block .detail {
     font-size: 13px;
     color: var(--muted);
@@ -144,7 +178,7 @@
   /* Bottom logo (smaller) */
   .bottom-logo {
     width: 100%;
-    max-width: 200px;
+    max-width: 280px;
     margin: 60px auto 0;
     display: block;
     opacity: 0.85;
@@ -176,12 +210,12 @@
   .back-home a:hover { color: var(--accent); }
 
   @media (max-width: 600px) {
-    nav.topnav ul { gap: 20px; padding: 16px 20px; }
-    nav.topnav a { font-size: 11px; letter-spacing: 0.1em; }
+    nav.topnav ul { gap: 22px; padding: 16px 16px; }
+    nav.topnav a { font-size: 13px; letter-spacing: 0.1em; }
     .container { padding: 40px 24px 60px; }
     .info-block h2 { font-size: 22px; }
     .logo-image { max-width: 240px; }
-    .bottom-logo { max-width: 160px; }
+    .bottom-logo { max-width: 220px; }
     .info-block .address { font-size: 15px; }
     .info-block .lot { font-size: 14px; }
     .info-block .detail { font-size: 12px; }
@@ -201,11 +235,6 @@
 
   <div class="container">
 
-    <!-- Top Logo (Tilted Hannam sign) -->
-    <div class="logo-image">
-      <img src="images/tilted-logo.jpg" alt="Tilted Hannam">
-    </div>
-
     <!-- Illustrated Map -->
     <div class="map-illustration">
       <img src="images/tilted-map.jpg" alt="틸티드 한남 약도">
@@ -224,7 +253,7 @@
     <!-- 주차 -->
     <div class="info-block">
       <h2>주차</h2>
-      <p class="lot">볼보빌딩 / 블루스퀘어</p>
+      <p class="lot"><span class="star-mark">볼보빌딩</span> / 블루스퀘어</p>
       <p class="lot">한강진공영 / 한남역공영</p>
       <p class="detail spaced">
         주말이라 공영주차장도 혼잡할 수 있습니다.<br>
