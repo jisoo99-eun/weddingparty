@@ -15,6 +15,8 @@
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
     background: var(--bg);
@@ -24,21 +26,56 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* Top Navigation */
+  nav.topnav {
+    position: sticky;
+    top: 0;
+    background: rgba(250, 250, 247, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    z-index: 100;
+  }
+
+  nav.topnav ul {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  nav.topnav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  nav.topnav a:hover {
+    color: var(--accent);
+  }
+
   .container {
     max-width: 720px;
     margin: 0 auto;
-    padding: 80px 32px;
+    padding: 60px 32px;
   }
 
   /* Hero */
   .hero {
     text-align: center;
-    margin-bottom: 120px;
+    margin-bottom: 100px;
+    padding-top: 40px;
   }
 
   .photo {
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
     background: linear-gradient(135deg, #e8e4dc, #d4cec2);
     margin: 0 auto 40px;
@@ -70,9 +107,36 @@
     letter-spacing: 0.02em;
   }
 
+  /* Main Photos Row (group / multi) */
+  .main-photos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 40px;
+  }
+
+  .main-photos .avatar {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8e4dc, #d4cec2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 12px;
+    overflow: hidden;
+  }
+
+  .main-photos .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
   /* Section */
   section {
     margin-bottom: 100px;
+    scroll-margin-top: 80px;
   }
 
   .label {
@@ -99,6 +163,19 @@
 
   p.muted {
     color: var(--muted);
+  }
+
+  p.invite-text {
+    font-size: 14px;
+    line-height: 2;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.02em;
+    margin-bottom: 32px;
+  }
+
+  p.invite-text:last-child {
+    margin-bottom: 0;
   }
 
   /* Gallery */
@@ -156,9 +233,7 @@
     font-size: 15px;
   }
 
-  .details li:last-child {
-    border-bottom: none;
-  }
+  .details li:last-child { border-bottom: none; }
 
   .details .key {
     color: var(--muted);
@@ -192,6 +267,107 @@
     color: var(--bg);
   }
 
+  /* Location Section */
+  .map-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 32px 0;
+    border: 1px solid var(--line);
+  }
+
+  .map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .address-box {
+    background: white;
+    border: 1px solid var(--line);
+    padding: 24px;
+    border-radius: 4px;
+    margin-bottom: 32px;
+  }
+
+  .address-box .name {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .address-box .addr {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .address-box .phone {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .map-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .map-links a {
+    text-align: center;
+    padding: 14px 8px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+  }
+
+  .map-links a:hover {
+    border-color: var(--fg);
+  }
+
+  .directions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .direction-block {
+    background: white;
+    border: 1px solid var(--line);
+    padding: 24px;
+    border-radius: 4px;
+  }
+
+  .direction-block h4 {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .direction-block p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    color: var(--fg);
+  }
+
+  .direction-block .small {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
   /* Footer */
   footer {
     text-align: center;
@@ -203,87 +379,112 @@
   }
 
   @media (max-width: 600px) {
-    .container { padding: 60px 24px; }
+    nav.topnav ul { gap: 20px; padding: 16px 20px; }
+    nav.topnav a { font-size: 11px; letter-spacing: 0.1em; }
+    .container { padding: 40px 24px; }
     .hero h1 { font-size: 32px; }
-    .photo { width: 140px; height: 140px; }
+    .photo { width: 160px; height: 160px; }
     .invite-card { padding: 32px 24px; }
     .details li { flex-direction: column; gap: 4px; }
     .details .value { text-align: left; }
+    .directions { grid-template-columns: 1fr; }
+    .map-links { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
+
+  <!-- Top Navigation -->
+  <nav class="topnav">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="moments.html">Moments</a></li>
+      <li><a href="location.html">Location</a></li>
+      <li><a href="#invitation">Invite</a></li>
+    </ul>
+  </nav>
+
   <div class="container">
 
     <!-- Hero -->
     <header class="hero">
       <div class="photo">
-        <!-- 사진을 넣으려면 아래 주석을 풀고 경로를 수정하세요 -->
-        <!-- <img src="me.jpg" alt="프로필 사진"> -->
-        PHOTO
+        <!-- 대표 사진 1장: 파일명 수정 -->
+        <!-- <img src="images/main.jpg" alt="대표 사진"> -->
+        MAIN PHOTO
       </div>
-      <h1>안녕하세요, 저는 OOO입니다</h1>
+      <h1>안녕하세요, 저희를 소개합니다</h1>
       <p class="tagline">작은 파티에 여러분을 초대합니다</p>
+
+      <!-- 여러 명의 프로필 사진을 원한다면 아래를 사용 -->
+      <div class="main-photos">
+        <div class="avatar">
+          <!-- <img src="images/person1.jpg" alt="사람1"> -->
+          PERSON 1
+        </div>
+        <div class="avatar">
+          <!-- <img src="images/person2.jpg" alt="사람2"> -->
+          PERSON 2
+        </div>
+        <div class="avatar">
+          <!-- <img src="images/person3.jpg" alt="사람3"> -->
+          PERSON 3
+        </div>
+      </div>
     </header>
 
     <!-- About -->
-    <section>
+    <section id="about">
       <div class="label">About</div>
-      <h2>저에 대해서</h2>
-      <p>
-        안녕하세요. 이곳에 자기소개를 자유롭게 적어보세요.
-        어떤 일을 하고 있는지, 무엇을 좋아하는지, 요즘 어떤 것에
-        관심을 가지고 있는지 편안하게 이야기해도 좋아요.
+      <h2>소중한 분들께</h2>
+      <p class="invite-text">
+        작지만 따뜻한 자리를 준비했습니다.<br>
+        편한 마음으로 오셔서, 좋은 이야기와 시간을 나누어요.
       </p>
-      <p class="muted">
-        커피, 오래된 책, 늦은 밤의 산책을 좋아합니다.
+      <p class="invite-text">
+        저희 두 사람은 전통적인 예식 대신,<br>
+        결혼을 앞두고 소중한 분들과<br>
+        조금 더 자유롭고 즐거운 시간을 보내고 싶었습니다.
       </p>
-    </section>
-
-    <!-- Gallery -->
-    <section>
-      <div class="label">Moments</div>
-      <h2>순간들</h2>
-      <div class="gallery">
-        <div class="gallery-item">IMAGE 1</div>
-        <div class="gallery-item">IMAGE 2</div>
-        <div class="gallery-item">IMAGE 3</div>
-        <div class="gallery-item">IMAGE 4</div>
-      </div>
+      <p class="invite-text">
+        음식과 와인, 음악이 준비된 자리를 마련했습니다.<br>
+        잠시 들러 인사만 나누셔도 좋고,<br>
+        웃고 떠들며 오래 머무르셔도 좋습니다.<br>
+        그저 편한 마음으로 오셔서<br>
+        저희의 새로운 시작을 함께해 주세요.
+      </p>
+      <p class="invite-text">
+        공간이 아담하여 이번 자리는<br>
+        가까운 분들만 모시는 파티 형식으로 진행될 예정입니다.<br>
+        많은 분들을 모두 초대하지 못하는 점,<br>
+        넓은 마음으로 이해해 주신다면 감사하겠습니다.
+      </p>
+      <p class="invite-text">
+        함께해 주시는 마음만으로도<br>
+        저희에겐 큰 기쁨이 될 것입니다.<br>
+        감사합니다.
+      </p>
     </section>
 
     <!-- Party Invitation -->
-    <section>
+    <section id="invitation">
       <div class="label">Invitation</div>
-      <h2>파티 초대</h2>
+      <h2>초대장</h2>
       <p>
-        작지만 따뜻한 자리를 준비했습니다.
-        편한 마음으로 오셔서, 좋은 이야기와 시간을 나누어요.
+        원활한 준비를 위해 참석 여부와 인원을 아래 RSVP로 알려주시면 감사하겠습니다.
       </p>
 
       <div class="invite-card">
         <h3>You're Invited</h3>
         <ul class="details">
-          <li>
-            <span class="key">DATE</span>
-            <span class="value">2026년 9월 12일 토요일</span>
-          </li>
-          <li>
-            <span class="key">TIME</span>
-            <span class="value">오후 6시 30분</span>
-          </li>
-          <li>
-            <span class="key">PLACE</span>
-            <span class="value">서울시 어딘가 카페 OOO</span>
-          </li>
-          <li>
-            <span class="key">DRESS</span>
-            <span class="value">편안하게</span>
-          </li>
+          <li><span class="key">DATE</span><span class="value">2026년 9월 12일 토요일</span></li>
+          <li><span class="key">TIME</span><span class="value">오후 6시 30분</span></li>
+          <li><span class="key">PLACE</span><span class="value">카페 OOO (4층)</span></li>
+          <li><span class="key">DRESS</span><span class="value">편안하게</span></li>
         </ul>
 
         <div class="rsvp">
-          <a href="mailto:your@email.com?subject=파티 참석">RSVP</a>
+          <a href="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfiFAhDgYlvdzncNMGs9yTtY3xOA3wY0JwpQ93u06sIYZITvg/viewform?usp=publish-editor&pli=1&authuser=0" target="_blank" rel="noopener">RSVP</a>
         </div>
       </div>
     </section>
