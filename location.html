@@ -167,6 +167,55 @@
     margin-top: 24px;
   }
 
+  /* Map App Buttons */
+  .map-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .map-buttons a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .map-buttons a:hover {
+    background: var(--accent);
+    color: white;
+  }
+
+  .map-buttons .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .map-buttons .dot-naver { background: #03C75A; }
+  .map-buttons .dot-kakao { background: #FFCD00; }
+
+  .map-buttons a:hover .dot {
+    box-shadow: 0 0 0 2px white;
+  }
+
+  /* Bottom logo link */
+  a.bottom-logo-link {
+    display: block;
+    text-decoration: none;
+  }
+
   /* Divider */
   .divider {
     width: 40px;
@@ -246,6 +295,17 @@
       <p class="address">서울 용산구 한남대로 150-10</p>
       <p class="detail">지하철 6호선 한강진역 2번 출구 도보 4분</p>
       <p class="detail">버스 서울시중부기술교육원/블루스퀘어역 도보 1분</p>
+
+      <div class="map-buttons">
+        <a href="https://map.naver.com/v5/search/서울 용산구 한남대로 150-10" target="_blank" rel="noopener">
+          <span class="dot dot-naver"></span>
+          네이버 지도
+        </a>
+        <a href="https://map.kakao.com/?q=서울 용산구 한남대로 150-10" target="_blank" rel="noopener">
+          <span class="dot dot-kakao"></span>
+          카카오맵
+        </a>
+      </div>
     </div>
 
     <div class="divider"></div>
@@ -261,10 +321,12 @@
       </p>
     </div>
 
-    <!-- Bottom Logo (small) -->
-    <div class="bottom-logo">
-      <img src="images/tilted-logo.jpg" alt="Tilted Hannam">
-    </div>
+    <!-- Bottom Logo (small) - links to Instagram -->
+    <a href="https://www.instagram.com/tiltedhannam?igsh=MTdub3NlNXp0ZXZscw==" target="_blank" rel="noopener" class="bottom-logo-link">
+      <div class="bottom-logo">
+        <img src="images/tilted-logo.jpg" alt="Tilted Hannam Instagram">
+      </div>
+    </a>
 
     <div class="back-home">
       <a href="index.html">← 메인으로 돌아가기</a>
