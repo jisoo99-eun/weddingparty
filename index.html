@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안녕하세요 — 파티에 초대합니다</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --fg: #1a1a1a;
+    --muted: #6b6b6b;
+    --line: #e5e5e0;
+    --accent: #c94f3d;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.7;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 80px 32px;
+  }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    margin-bottom: 120px;
+  }
+
+  .photo {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8e4dc, #d4cec2);
+    margin: 0 auto 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    overflow: hidden;
+  }
+
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .hero .tagline {
+    color: var(--muted);
+    font-size: 16px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Section */
+  section {
+    margin-bottom: 100px;
+  }
+
+  .label {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    margin-bottom: 32px;
+  }
+
+  p {
+    color: var(--fg);
+    margin-bottom: 20px;
+    font-size: 17px;
+  }
+
+  p.muted {
+    color: var(--muted);
+  }
+
+  /* Gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #ede8de, #dfd8c9);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 13px;
+    overflow: hidden;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Invitation */
+  .invite-card {
+    border: 1px solid var(--line);
+    padding: 48px 40px;
+    background: white;
+    border-radius: 4px;
+    margin-top: 32px;
+  }
+
+  .invite-card h3 {
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 32px;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+
+  .details {
+    list-style: none;
+  }
+
+  .details li {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+
+  .details li:last-child {
+    border-bottom: none;
+  }
+
+  .details .key {
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .details .value {
+    color: var(--fg);
+    text-align: right;
+  }
+
+  .rsvp {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  .rsvp a {
+    display: inline-block;
+    padding: 14px 36px;
+    border: 1px solid var(--fg);
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+  }
+
+  .rsvp a:hover {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 60px 24px; }
+    .hero h1 { font-size: 32px; }
+    .photo { width: 140px; height: 140px; }
+    .invite-card { padding: 32px 24px; }
+    .details li { flex-direction: column; gap: 4px; }
+    .details .value { text-align: left; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="photo">
+        <!-- 사진을 넣으려면 아래 주석을 풀고 경로를 수정하세요 -->
+        <!-- <img src="me.jpg" alt="프로필 사진"> -->
+        PHOTO
+      </div>
+      <h1>안녕하세요, 저는 OOO입니다</h1>
+      <p class="tagline">작은 파티에 여러분을 초대합니다</p>
+    </header>
+
+    <!-- About -->
+    <section>
+      <div class="label">About</div>
+      <h2>저에 대해서</h2>
+      <p>
+        안녕하세요. 이곳에 자기소개를 자유롭게 적어보세요.
+        어떤 일을 하고 있는지, 무엇을 좋아하는지, 요즘 어떤 것에
+        관심을 가지고 있는지 편안하게 이야기해도 좋아요.
+      </p>
+      <p class="muted">
+        커피, 오래된 책, 늦은 밤의 산책을 좋아합니다.
+      </p>
+    </section>
+
+    <!-- Gallery -->
+    <section>
+      <div class="label">Moments</div>
+      <h2>순간들</h2>
+      <div class="gallery">
+        <div class="gallery-item">IMAGE 1</div>
+        <div class="gallery-item">IMAGE 2</div>
+        <div class="gallery-item">IMAGE 3</div>
+        <div class="gallery-item">IMAGE 4</div>
+      </div>
+    </section>
+
+    <!-- Party Invitation -->
+    <section>
+      <div class="label">Invitation</div>
+      <h2>파티 초대</h2>
+      <p>
+        작지만 따뜻한 자리를 준비했습니다.
+        편한 마음으로 오셔서, 좋은 이야기와 시간을 나누어요.
+      </p>
+
+      <div class="invite-card">
+        <h3>You're Invited</h3>
+        <ul class="details">
+          <li>
+            <span class="key">DATE</span>
+            <span class="value">2026년 9월 12일 토요일</span>
+          </li>
+          <li>
+            <span class="key">TIME</span>
+            <span class="value">오후 6시 30분</span>
+          </li>
+          <li>
+            <span class="key">PLACE</span>
+            <span class="value">서울시 어딘가 카페 OOO</span>
+          </li>
+          <li>
+            <span class="key">DRESS</span>
+            <span class="value">편안하게</span>
+          </li>
+        </ul>
+
+        <div class="rsvp">
+          <a href="mailto:your@email.com?subject=파티 참석">RSVP</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Made with care · 2026
+    </footer>
+
+  </div>
+</body>
+</html>
