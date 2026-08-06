@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>초대합니다</title>
 
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
 <!-- 카톡/SMS 미리보기 (Open Graph) -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="초대합니다">
@@ -23,11 +28,16 @@
 <meta name="description" content="11월 7일 오후 5시 틸티드한남">
 <style>
   :root {
-    --bg: #fafaf7;
-    --fg: #1a1a1a;
-    --muted: #6b6b6b;
-    --line: #e5e5e0;
-    --accent: #c94f3d;
+    --bg: #7d2a1f;
+    --bg-alt: #6a1f16;
+    --fg: #fff6ea;
+    --muted: #d4c0a8;
+    --line: #a04030;
+    --accent: #f0c56b;
+    --accent-soft: #e8a598;
+    --card-bg: #fffaf0;
+    --card-text: #3a2818;
+    --card-muted: #8a7452;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,11 +56,11 @@
   nav.topnav {
     position: sticky;
     top: 0;
-    background: rgba(250, 250, 247, 0.95);
+    background: rgba(125, 42, 31, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    border-bottom: 1px solid rgba(255, 246, 234, 0.15);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
     z-index: 100;
   }
 
@@ -94,6 +104,12 @@
   nav.topnav a.active { color: var(--accent); }
   nav.topnav a.active::after { transform: scaleX(1); }
 
+  /* Photo — clean, no border */
+  .photo {
+    background: linear-gradient(135deg, #f5ead2, #e8d8b0);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
   .container {
     max-width: 720px;
     margin: 0 auto;
@@ -104,7 +120,20 @@
   .hero {
     text-align: center;
     margin-bottom: 100px;
-    padding-top: 40px;
+    padding-top: 20px;
+  }
+
+  /* Illustration at top of hero */
+  .hero-illustration {
+    width: 100%;
+    margin: 60px 0 20px;
+    overflow: hidden;
+  }
+
+  .hero-illustration img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   .photo {
@@ -122,25 +151,44 @@
     display: block;
   }
 
+  .hero .ribbon-decor {
+    display: block;
+    width: 74px;
+    height: auto;
+    margin: 0 auto 18px;
+    opacity: 0.9;
+  }
+
   .hero h1 {
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    margin-bottom: 14px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    margin-bottom: 16px;
+    color: var(--accent);
+    text-indent: 0.28em; /* compensate letter-spacing */
   }
 
   .hero .date-info {
     color: var(--fg);
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.08em;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .hero .tagline {
     color: var(--muted);
-    font-size: 14px;
+    font-size: 17px;
     letter-spacing: 0.02em;
+  }
+
+  .hero .divider-line {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+    margin: 24px auto 0;
+    opacity: 0.5;
   }
 
   /* Program Cards — Circle icon style */
@@ -167,16 +215,15 @@
     width: 140px;
     height: 140px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #e8e4dc, #d4cec2);
+    background: linear-gradient(135deg, #f0e5cd, #d4c5a5);
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--muted);
+    color: var(--card-muted);
     font-size: 11px;
     letter-spacing: 0.05em;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-    border: 3px solid white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
   }
 
   .program-card .circle img {
@@ -187,10 +234,13 @@
 
   .program-card .label-en {
     margin-top: 18px;
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.3em;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--accent);
+    letter-spacing: 0.28em;
     text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   }
 
   @media (max-width: 500px) {
@@ -310,10 +360,12 @@
   }
 
   h2 {
+    font-family: "Playfair Display", Georgia, serif;
     font-size: 28px;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: -0.01em;
     margin-bottom: 32px;
+    color: var(--fg);
   }
 
   p {
@@ -325,26 +377,80 @@
   p.invite-text {
     font-size: 14px;
     line-height: 2;
-    color: var(--muted);
+    color: var(--fg);
     text-align: center;
     letter-spacing: 0.02em;
     margin-bottom: 32px;
+    opacity: 0.9;
   }
 
   p.invite-text:last-child {
     margin-bottom: 0;
   }
 
-  /* Invitation — Envelope style (clean white) */
+  /* Envelope wrapper — shadow lives here so it follows the WHOLE paper */
+  .invite-wrapper {
+    position: relative;
+    margin: 148px 0 0;
+    perspective: 1600px;
+
+    /* Entrance state */
+    opacity: 0;
+    transform: translateY(60px);
+    transition:
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.4s ease;
+
+    /* One unified drop-shadow follows the combined outline (rectangle → pentagon) */
+    filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.3))
+            drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+
+  .invite-wrapper.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .invite-wrapper:hover {
+    filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.38))
+            drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
+  }
+
+  /* Letter body — rectangle, no border/shadow of its own */
   .invite-card {
     position: relative;
-    padding: 155px 40px 48px;
-    background: #fdfdfb;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08),
-                0 2px 6px rgba(0, 0, 0, 0.04),
-                inset 0 0 0 1px #eeeae2;
-    margin-top: 48px;
-    border-radius: 3px;
+    padding: 60px 40px 56px;
+    background: var(--card-bg);
+    color: var(--card-text);
+  }
+
+  /* Hide old ∨ lines / shading */
+  .invite-card::before,
+  .invite-card::after {
+    content: none;
+  }
+
+  /* Flap = the pentagon's top pointed portion.
+     Same color as body, no separate shadow — feels like one piece of paper.
+     Initial: rotated 180° (folded DOWN inside body, hiding content).
+     Animated: rotateX(0) (folded UP → completes the pentagon). */
+  .invite-flap {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: var(--card-bg);
+    clip-path: polygon(50% 0%, 100% 100%, 0 100%);
+    transform-origin: bottom center;
+    transform: rotateX(180deg);
+    transition: transform 1.5s cubic-bezier(0.72, 0.02, 0.28, 1) 0.9s;
+    z-index: 2;
+  }
+
+  .invite-wrapper.animate-in .invite-flap {
+    transform: rotateX(0deg);
   }
 
   /* Envelope flap ∨ (two soft diagonal lines meeting at center) */
@@ -357,15 +463,15 @@
     height: 110px;
     background:
       linear-gradient(to bottom right,
-        transparent calc(50% - 0.6px),
-        #d5d0c4 calc(50% - 0.6px),
-        #d5d0c4 calc(50% + 0.6px),
+        transparent calc(100% - 0.0px),
+        #13110e calc(0% - 0.0px),
+        #d8c8a8 calc(50% + 0.6px),
         transparent calc(50% + 0.6px))
       top left / 50% 100% no-repeat,
       linear-gradient(to bottom left,
-        transparent calc(50% - 0.6px),
-        #d5d0c4 calc(50% - 0.6px),
-        #d5d0c4 calc(50% + 0.6px),
+        transparent calc(100% - 0.6px),
+        #d8c8a8 calc(50% - 0.6px),
+        #d8c8a8 calc(50% + 0.6px),
         transparent calc(50% + 0.6px))
       top right / 50% 100% no-repeat;
     pointer-events: none;
@@ -384,15 +490,15 @@
   }
 
   .invite-card h3 {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 22px;
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: 24px;
     font-weight: 400;
     font-style: italic;
     margin-top: 8px;
     margin-bottom: 32px;
     text-align: center;
     letter-spacing: 0.02em;
-    color: #3a3a3a;
+    color: #9a2f1e;
   }
 
   .details {
@@ -403,21 +509,21 @@
     display: flex;
     justify-content: space-between;
     padding: 16px 0;
-    border-bottom: 1px dashed #d5d0c4;
+    border-bottom: 1px dashed  #d8c8a8;
     font-size: 15px;
   }
 
   .details li:last-child { border-bottom: none; }
 
   .details .key {
-    color: #8a8a85;
+    color: var(--card-muted);
     letter-spacing: 0.05em;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Playfair Display", Georgia, serif;
     font-style: italic;
   }
 
   .details .value {
-    color: #3a3a3a;
+    color: var(--card-text);
     text-align: right;
   }
 
@@ -429,20 +535,22 @@
   .rsvp a {
     display: inline-block;
     padding: 14px 36px;
-    border: 1px solid #3a3a3a;
-    color: #3a3a3a;
+    border: 1px solid #9a2f1e;
+    color: #9a2f1e;
     background: transparent;
     text-decoration: none;
     font-size: 14px;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     transition: all 0.2s ease;
+    font-family: "Playfair Display", Georgia, serif;
+    font-style: italic;
   }
 
   .rsvp a:hover {
-    background: #3a3a3a;
-    color: #fdfdfb;
-    border-color: #3a3a3a;
+    background: #9a2f1e;
+    color: #fffaf0;
+    border-color:  #9a2f1e;
   }
 
   /* Footer */
@@ -451,16 +559,21 @@
     color: var(--muted);
     font-size: 13px;
     padding-top: 40px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid rgba(255, 246, 234, 0.15);
     letter-spacing: 0.05em;
+    opacity: 0.75;
   }
 
   @media (max-width: 600px) {
     nav.topnav ul { gap: 22px; padding: 16px 16px; }
     nav.topnav a { font-size: 13px; letter-spacing: 0.1em; }
     .container { padding: 40px 24px; }
-    .hero h1 { font-size: 22px; }
-    .invite-card { padding: 32px 24px; }
+    .hero { margin-bottom: 80px; padding-top: 10px; }
+    .hero-illustration { margin-top: 48px; }
+    .hero h1 { font-size: 26px; letter-spacing: 0.22em; }
+    .invite-wrapper { margin: 120px 0 0; }
+    .invite-card { padding: 40px 24px 40px; }
+    .invite-flap { top: -80px; height: 80px; }
     .details li { flex-direction: column; gap: 4px; }
     .details .value { text-align: left; }
   }
@@ -482,38 +595,16 @@
 
     <!-- Hero -->
     <header class="hero">
-      <div class="photo">
-        <img src="images/main.jpeg" alt="대표 사진">
-      </div>
       <h1>SAVE THE DATE</h1>
       <p class="date-info">11월 7일 오후 5시 - 7시</p>
       <p class="tagline">웨딩 파티에 여러분을 초대합니다</p>
+      <div class="divider-line"></div>
     </header>
 
     <!-- About -->
     <section id="about">
-      <div class="label" style="text-align: center;">About</div>
-
-      <!-- 파티 프로그램 미리보기 -->
-      <div class="program-cards">
-        <a href="#modal-space" class="program-card">
-          <div class="circle">
-            <img src="images/space.jpeg" alt="Space">
-          </div>
-          <div class="label-en">Space</div>
-        </a>
-        <a href="#modal-dining" class="program-card">
-          <div class="circle">
-            <img src="images/dining.jpeg" alt="Dining">
-          </div>
-          <div class="label-en">Dining</div>
-        </a>
-        <a href="#modal-dessert" class="program-card">
-          <div class="circle">
-            <img src="images/dessert.jpeg" alt="Dessert">
-          </div>
-          <div class="label-en">Dessert</div>
-        </a>
+      <div class="hero-illustration">
+        <img src="images/hannam-bg.jpg" alt="Tilted Hannam">
       </div>
 
       <p class="invite-text" style="margin-top: 60px;">
@@ -538,6 +629,30 @@
         감사합니다.<br><br>
         이건호 &amp; 은지수 드림
       </p>
+
+      <div class="label" style="text-align: center; margin-top: 80px;">About</div>
+
+      <!-- 파티 프로그램 미리보기 -->
+      <div class="program-cards">
+        <a href="#modal-space" class="program-card">
+          <div class="circle">
+            <img src="images/space.jpeg" alt="Space">
+          </div>
+          <div class="label-en">Space</div>
+        </a>
+        <a href="#modal-dining" class="program-card">
+          <div class="circle">
+            <img src="images/dining.jpeg" alt="Dining">
+          </div>
+          <div class="label-en">Dining</div>
+        </a>
+        <a href="#modal-dessert" class="program-card">
+          <div class="circle">
+            <img src="images/dessert.jpeg" alt="Dessert">
+          </div>
+          <div class="label-en">Dessert</div>
+        </a>
+      </div>
     </section>
 
     <!-- Party Invitation -->
@@ -547,7 +662,9 @@
         원활한 준비를 위해 참석 여부와 인원을 아래 RSVP로 알려주시면 감사하겠습니다.
       </p>
 
-      <div class="invite-card">
+      <div class="invite-wrapper">
+        <div class="invite-flap"></div>
+        <div class="invite-card">
         <h3>You're Invited</h3>
         <ul class="details">
           <li><span class="key">DATE</span><span class="value">2026년 11월 7일 토요일</span></li>
@@ -557,6 +674,7 @@
 
         <div class="rsvp">
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiFAhDgYlvdzncNMGs9yTtY3xOA3wY0JwpQ93u06sIYZITvg/viewform" target="_blank" rel="noopener">RSVP</a>
+        </div>
         </div>
       </div>
     </section>
@@ -591,6 +709,26 @@
       <img src="images/dessert.jpeg" alt="Dessert">
     </div>
   </div>
+
+  <!-- Envelope opening animation trigger -->
+  <script>
+    (function() {
+      const wrappers = document.querySelectorAll('.invite-wrapper');
+      if (!('IntersectionObserver' in window)) {
+        wrappers.forEach(w => w.classList.add('animate-in'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      wrappers.forEach(w => observer.observe(w));
+    })();
+  </script>
 
 </body>
 </html>
